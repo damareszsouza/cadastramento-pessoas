@@ -138,6 +138,7 @@ import java.sql.DriverManager;
 // driver de conexão SQL para Java 
 import java.sql.SQLException; 
 // classe para tratamento de exceções 
+
 public class ConnectionFactory {
      public Connection getConnection() {
 		 try {
@@ -149,6 +150,7 @@ public class ConnectionFactory {
      }
 }
 
+
 Salve a alteração (CTRL+S).
 
 OBS.: não esqueça de salvar todas as alterações nos códigos ao decorrer do tutorial. OBS 2: altere "seu-nome-de-usuario" e "sua-senha" para as configurações do seu Banco de Dados.
@@ -156,7 +158,8 @@ OBS.: não esqueça de salvar todas as alterações nos códigos ao decorrer do 
 Vamos criar uma classe para testar a conectividade ao MySQL. Pode ser dentro do pacote factory mesmo. Coloquemos o nome TestaConexao:
 
 
-Clique em Finalizar. Script da classe TestaConexao:
+Clique em Finalizar.
+# Script da classe TestaConexao:
 
 package factory; 
 import java.sql.Connection; 
@@ -168,6 +171,7 @@ public class TestaConexao {
          connection.close();
      }
 }
+
 Para executar qualquer aplicativo no NetBeans teclamos SHIFT+F6. Faça-o. Perceba que uma mensagem de erro é exibida no console. Esta mensagem de erro significa ausência do driver JDBC. Precisamos baixá-lo para assim fazermos a conexão. Endereço para download.
 
 Se o arquivo vier compactado, descompacte-o e escolha o diretório de sua preferência. Depois de baixar o driver JDBC, vá em: Bibliotecas > Adicionar JAR/pasta.
@@ -192,6 +196,7 @@ Passo 4: Modelo:
 Crie as variáveis id (Long), nome, CPF, email, telefone (todas string) e os métodos getters e setters. Assim ficará o script da classe:
 
 package modelo;
+
 public class Usuario {
     Long id;
     String nome;
@@ -231,6 +236,7 @@ public class Usuario {
     } 
 
 }
+
 
 Passo 5: DAO:
 Crie no pacote DAO a classe UsuarioDAO: dao > Novo > Classe Java > UsuarioDAO > Finalizar.
@@ -318,12 +324,14 @@ jTextField1.setText("");
 jTextField2.setText("");
 jTextField3.setText("");
 jTextField4.setText("");
+
 Estes scripts são responsáveis por limpar ou apagar qualquer string escrita pelo usuário em cada um dos 4 campos de texto do formulário.
 
 Passo 9: Evento CADASTRAR
 Precisamos criar o principal evento que é literalmente cadastrar o usuário. Para isso, vamos clicar duas vezes no botão "Cadastrar" e, na aba Código-fonte, no evento jButton1ActionPerformed ficará assim o código:
 
 // instanciando a classe Usuario do pacote modelo e criando seu objeto usuarios
+
 Usuario usuarios = new Usuario();
 usuarios.setNome(jTextField1.getText());
 usuarios.setCpf(jTextField2.getText());
@@ -331,22 +339,27 @@ usuarios.setEmail(jTextField3.getText());
 usuarios.setTelefone(jTextField4.getText());
 
 // fazendo a validação dos dados
+
 if ((jTextField1.getText().isEmpty()) || (jTextField2.getText().isEmpty()) || (jTextField3.getText().isEmpty()) || (jTextField4.getText().isEmpty())) {
    JOptionPane.showMessageDialog(null, "Os campos não podem retornar vazios");
 }
 else {
 
     // instanciando a classe UsuarioDAO do pacote dao e criando seu objeto dao
+    
     UsuarioDAO dao = new UsuarioDAO();
     dao.adiciona(usuarios);
     JOptionPane.showMessageDialog(null, "Usuário "+jTextField1.getText()+" inserido com sucesso! ");
 }
 
 // apaga os dados preenchidos nos campos de texto
+
 jTextField1.setText("");
 jTextField2.setText("");
 jTextField3.setText("");
 jTextField4.setText("");
+
+
 Certamente algumas mensagens de erro aparecerão. Isto porque temos que importar no início do código as classes Usuario (pacote modelo) e UsuarioDAO (pacote dao). Além destas, precisamos importar a classe JOptionPane, responsável pelas janelas de validação, aquelas que aparecem dizendo se o usuário foi ou não cadastrado, se os campos estão vazios, etc.
 
 Coloque estas linhas no início do código, abaixo de "package gui", na aba Código-fonte:
@@ -354,6 +367,7 @@ Coloque estas linhas no início do código, abaixo de "package gui", na aba Cód
 import modelo.Usuario;
 import dao.UsuarioDAO;
 import javax.swing.JOptionPane;
+
 Agora sim não aparecerá erro nenhum e o cadastro poderá ser feito.
 Faça um teste! Veja:
 
